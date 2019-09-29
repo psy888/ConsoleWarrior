@@ -22,12 +22,19 @@ public class Person {
     }
     public void setHP(int hp){
         this.healthPoints = hp;
+        if(hp>100){
+            this.healthPoints = 100;
+        }
+        if (hp<0){
+            this.healthPoints = 0;
+        }
+//        this.healthPoints = (hp>0)?hp:0;
     }
     public String getName(){
         return name;
     }
     @Override
     public String toString() {
-        return "Игрок :" + this.name + " | Здоровье : " + this.healthPoints + "%";
+        return "Игрок :" + this.name + " | Здоровье : " + this.healthPoints + " очков.";
     }
 }
