@@ -135,7 +135,7 @@ public class Main {
 
             //Задержка 3 с
             try {
-                Thread.sleep(3);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {/*ignore*/}
         }while (user.getHP()>0&&pc.getHP()>0);
         Person winner = (player[0].getHP()>0)?player[0]:player[1];
