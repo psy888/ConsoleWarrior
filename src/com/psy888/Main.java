@@ -1,6 +1,7 @@
 package com.psy888;
 
 import java.util.Scanner;
+import com.psy888.Person;
 
 public class Main {
 
@@ -17,7 +18,9 @@ public class Main {
     }
 
 
-
+    /**
+     * определить следующий ход
+     */
     public static void whoIsNext(){
         currentMove = (int) (Math.random() * 2);
     }
@@ -48,11 +51,7 @@ public class Main {
         {
             action = 2;
         }
-            //        int chance = (int) (Math.random() * 3);
 
-//        if (lessThan35){
-//            //todo !!!!!!!!!!!!!!!!!!! add 35 % of luck
-//        }
         int min = 0;
         int max = 0;
         boolean sign = true; //true -> " - " ; false -> " + "
@@ -71,7 +70,7 @@ public class Main {
         }
 
         hp = (int)(Math.random() * (max-min)  + min);
-        //todo процентовка исходов
+
 
         hp = (sign)?hp*-1:hp; //heal or damage
 
@@ -82,7 +81,7 @@ public class Main {
 
         //инициализация игрока Пользователя
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите ваше Имя : ");
+        System.out.println("Enter your name : ");
         String name = scanner.next();
         Person user =new Person(name);
 
@@ -96,16 +95,14 @@ public class Main {
         successAttackCnt = new int[player.length];
         damageCnt = new int[player.length];
 
-        System.out.println("Игра началась!");
-        //todo вставить текстовые картинки
+        System.out.println("Game started!");
         do {
             //game process here..
-            System.out.println("Следующий ход игрока :");
             whoIsNext(); // определить за кем следующий ход
-            System.out.println(player[currentMove].getName()); //1 - pc , 0 - user
+//            System.out.println("Player " + player[currentMove].getName()); //1 - pc , 0 - user
             System.out.println("***************************************************************************************");
             System.out.println("cxxxxx][===============>");
-            System.out.println("Игрок " +  player[currentMove].getName() + " атакует!");
+            System.out.println("Player " +  player[currentMove].getName() + " attacks!");
             System.out.println("cxxxxx][===============>");
             System.out.println("***************************************************************************************\n\n");
 
@@ -122,8 +119,8 @@ public class Main {
             //results
             if(attackResult>0){
                 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                System.out.println("Игрок " +  player[currentMove].getName() + " промахивается и розливает исцеляющее зелье на противника\n" +
-                        "Противник получает дополнительно +" + attackResult + " очков здоровья.");
+                System.out.println("Player " +  player[currentMove].getName() + " miss and spills a healing potion on an adversary\n" +
+                        "Opponent gets extra +" + attackResult + " heal points.");
                 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
 
             }else{
@@ -131,18 +128,18 @@ public class Main {
                 damageCnt[currentMove]+=attackResult;
                 successAttackCnt[currentMove]++;
                 System.out.println("---------------------------------------------------------------------------------------");
-                System.out.println("Игрок " +  player[currentMove].getName() + " наносит удар и отнимает у противника " + attackResult +
-                        " очков здоровья.");
+                System.out.println("Player " +  player[currentMove].getName() + " strikes and robs the enemy " + attackResult +
+                        " heal points.");
                 System.out.println("---------------------------------------------------------------------------------------\n\n");
             }
 
             attackCnt[currentMove]++;
 
             //промежуточный результат
-            System.out.println("\n******************************** Результаты : *****************************************\n");
+            System.out.println("\n******************************** Results : *****************************************\n");
             for (int i = 0; i < player.length; i++) {
 
-                System.out.println("Игрок :" + player[i].getName() + " | Здоровье : " + player[i].getHP() + " очков.");
+                System.out.println("Player :" + player[i].getName() + " | Health : " + player[i].getHP() + " points.");
                 System.out.println("\t\t-========-");
 
             }
@@ -154,21 +151,16 @@ public class Main {
             } catch (InterruptedException e) {/*ignore*/}
         }while (user.getHP()>0&&pc.getHP()>0);
         Person winner = (player[0].getHP()>0)?player[0]:player[1];
-        System.out.println("\n******************************** Игра Окончена ! **************************************\n");
-        System.out.println("ПОБЕДИЛ " + winner.getName() + " \n Осталось жизней : " + winner.getHP());
+        System.out.println("\n******************************** Game Over ! **************************************\n");
+        System.out.println( winner.getName() + "  WINS! \n Health left : " + winner.getHP() + " points.");
 
         System.out.println("************************************** Статистика : ************************************");
         for (int i = 0; i < player.length; i++) {
-            System.out.println("Игрок " + player[i].getName() +
-                    "\n Общее колличество атак : " + attackCnt[i] + " (из них удачных " + successAttackCnt[i] + ")\n" +
-                    "Всего нанесено урона : " + (damageCnt[i]*-1) + " очков." );
+            System.out.println("Player " + player[i].getName() +
+                    "\n Attacks total : " + attackCnt[i] + " (of which are successful : " + successAttackCnt[i] + ")\n" +
+                    "Total damage done : " + (damageCnt[i]*-1) + " points." );
         }
-        System.out.println("╱╭━━━━┳━━╭━━╮┏━━╮\n" +
-                "╱╰━━╮╱┃╱╱┃╱╱┃┣━━╯\n" +
-                "━━━━╯╱┃╱╱╰━━╯┃  \n" +
-                "┃╱┃╱┃╭━━╮┏━━╮╭━━━\n" +
-                "┃╱┃╱┃┣━━┫┣┳━╯╰━━╮\n" +
-                "╰━┻━╯┃╱╱┃┃┗━━━━━╯");
+
         System.out.println("\n***************************************************************************************\n\n");
     }
 }
