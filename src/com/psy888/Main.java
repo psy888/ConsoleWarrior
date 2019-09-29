@@ -30,17 +30,17 @@ public class Main {
      */
     public static int attack(boolean lessThan35){
         int hp = 0;
-        int lightDmg = (lessThan35)?2:5;
-        int maxDmg = (lessThan35)?2:4;
+        int lightDmg = (lessThan35)?20:40;
+        int maxDmg = (lessThan35)?20:40;
         int action;
 
-        int chance = (int) (Math.random() * 11);
-        System.out.println("Chance = " + chance);
+        int chance = (int) (Math.random() * 100);
+//        System.out.println("Chance = " + chance);
         if(chance < lightDmg) // light damage 40%
         {
             action = 0;
         }
-        else if(chance < maxDmg) // max damage 40%
+        else if(chance < maxDmg+lightDmg) // max damage 40%
         {
             action = 1;
         }
