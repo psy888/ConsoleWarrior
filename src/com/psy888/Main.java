@@ -151,10 +151,10 @@ public class Main {
             } catch (InterruptedException e) {/*ignore*/}
         }while (user.getHP()>0&&pc.getHP()>0);
         Person winner = (player[0].getHP()>0)?player[0]:player[1];
-        System.out.println("\n******************************** Game Over ! **************************************\n");
+        System.out.println("\n******************************** Game Over ! *******************************************\n");
         System.out.println( winner.getName() + "  WINS! \n Health left : " + winner.getHP() + " points.");
 
-        System.out.println("************************************** Статистика : ************************************");
+        System.out.println("************************************** Stats : *******************************************");
         for (int i = 0; i < player.length; i++) {
             System.out.println("Player " + player[i].getName() +
                     "\n Attacks total : " + attackCnt[i] + " (of which are successful : " + successAttackCnt[i] + ")\n" +
